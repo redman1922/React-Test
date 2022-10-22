@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.list-position {
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+}
+
 
 @keyframes App-logo-spin {
   from {
