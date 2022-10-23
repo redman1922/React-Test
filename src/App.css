@@ -34,6 +34,16 @@
   justify-content: space-around;
 }
 
+.margin-form {
+  margin: 0 0 35px 0;
+}
+
+.flex-header {
+  display: flex;
+  width: 1200px;
+  justify-content: space-around;
+}
+
 
 @keyframes App-logo-spin {
   from {
