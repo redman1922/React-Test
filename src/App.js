@@ -1,7 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 
+import Input from '@mui/material/Input';
+import Button from '@mui/material/Button';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import CommentIcon from '@mui/icons-material/Comment';
+import IconButton from '@mui/material/IconButton';
+
+
+
 import { useState, useEffect } from 'react';
+
 
 
 function App() {
@@ -54,40 +67,77 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>
-          <h4>Chat window</h4>
-          <div >
-            {messageList.map((el, i) => {
-              return (
-                <div className='list-position' key={i} >
-                  <div >{el.Author}</div>
-                  <div >{el.Text}</div>
-                </div>
-              );
-            })}
-          </div>
+        <div className='flex-header'>
+          {/* <List>
+            <ListItem>
+              <ListItemText>1</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>2</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>3</ListItemText>
+            </ListItem>
+          </List> */}
 
+          <List sx={{ width: '100%', maxWidth: 360 }}>
+            {[1, 2, 3].map((value) => (
+              <ListItem
+                key={value}
+                disableGutters
+                secondaryAction={
+                  <IconButton aria-label="comment">
+                    <CommentIcon />
+                  </IconButton>
+                }
+              >
+                <ListItemText primary={`Line item ${value}`} />
+              </ListItem>
+            ))}
+          </List>
+
+          <div>
+            <h4>Chat window</h4>
+            <div >
+              {messageList.map((el, i) => {
+                return (
+                  <div className='list-position' key={i} >
+                    <div >{el.Author}</div>
+                    <div >{el.Text}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         <img src={logo} className="App-logo" alt="logo" />
-        <div >
-          <input
+        <div className='margin-form'>
+          <Input
             type="text"
             placeholder="author"
             onChange={handleChangeAuthor}
             value={Message.Author}
+            autoFocus="true"
+            sx={{
+              color: 'white',
+            }}
           />
-          <input
+          <Input
             type="text"
-            placeholder="message"
+            placeholder="Input message"
             onChange={handleChangeMessage}
             value={Message.Text}
+            sx={{
+              color: 'white',
+            }}
           />
-          <button
+          <Button variant="contained"
             onClick={handleSubmit}>
             Send
-          </button>
+          </Button>
         </div>
+        <FormControlLabel control={<Switch />} label="Switch" />
       </header>
 
     </div>
