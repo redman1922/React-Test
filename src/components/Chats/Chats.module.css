@@ -1,0 +1,14 @@
+.nav_link{
+    color: #20232a;
+    font-size: 22px;
+    text-decoration: none;
+    margin: 0 250px 60px 0;
+}
+
+.nav_link:last-child{
+    margin: 0;
+}
+
+.pos_chats{
+    display: flex;
+}
