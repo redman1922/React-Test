@@ -7,7 +7,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
 const ChatBot = () => {
-    const listMessage = [1, 2, 3];
     const [messageList, setMessageList] = useState([]);
 
     //Закидываем в список значение из инпутов.

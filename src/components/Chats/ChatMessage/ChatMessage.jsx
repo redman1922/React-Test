@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './ChatMessage.module.css';
+// import s from './ChatMessage.module.css';
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,10 +9,9 @@ import ListItemText from "@mui/material/ListItemText";
 
 const ChatMessage = () => {
 
-    const listMessage = [1, 2, 3];
 
     return <List sx={{width: '100%', maxWidth: 420}}>
-        {listMessage.map((value) => (
+        {[1,2,3].map((value) => (
             <ListItem
                 key={value}
                 disableGutters

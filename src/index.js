@@ -3,34 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {legacy_createStore} from "redux";
 import {Provider} from "react-redux";
+import {store} from "./store";
 
-
-const initialState = {
-    showName: false,
-    name: 'Default'
-}
-
-const profileReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'True':
-            return {
-                ...state,
-                showName: !state.showName
-            }
-        default:
-            return state
-    }
-}
-
-
-const store = legacy_createStore(profileReducer)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
+        <React.StrictMode>
             <App/>
+        </React.StrictMode>
     </Provider>
 );
 
