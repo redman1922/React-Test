@@ -71,7 +71,7 @@ const ChatBot = () => {
                 placeholder="author"
                 onChange={handleChangeAuthor}
                 value={Message.Author}
-                autoFocus="true"
+                autoFocus={true}
                 sx={{
                     color: 'black',
                     margin:'40px 0 0 0'

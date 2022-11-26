@@ -19,6 +19,7 @@ function App() {
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/chats/*" element={<Chats/>}/>
                 <Route path="/" />
+                <Route path="*" element={<div>404 page</div>} />
             </Routes>
         </div>
         </BrowserRouter>
