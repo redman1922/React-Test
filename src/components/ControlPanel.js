@@ -1,16 +1,17 @@
 import { Box, Fab, TextField } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Send } from '@mui/icons-material';
+import { Person, Send } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage } from '../store/messages/actions';
+import { addMessage, addMessageSaga } from '../store/messages/actions';
 import { useParams } from 'react-router-dom'
 import {getmessageList} from "../store/messages/selectors";
 import {getProfileName} from "../store/profile/selectors";
 
 
+
 const ControlPanel = () => {
     const [value, setValue] = useState('');
-    const messages = useSelector(getmessageList);
+    // const messages = useSelector(getmessageList);
     const profileName = useSelector(getProfileName);
     const dispatch = useDispatch();
     const { chatId } = useParams();
@@ -20,31 +21,37 @@ const ControlPanel = () => {
         setValue(valueFromInput);
     }, [value]);
 
-    const sendMessage = (message, author) => {
-        dispatch(addMessage(chatId, {
-            text: message,
-            author: author
+    // const sendMessage = (message, author) => {
+    //     dispatch(addMessage(chatId, {
+    //         text: message,
+    //         author: author
+    //     }));
+    //     setValue('');
+    // }
+
+    const handleButton = useCallback(() => {
+        // dispatch(addMessage(chatId, {
+        dispatch(addMessageSaga(chatId, {
+            text: value,
+            author: profileName
         }));
         setValue('');
-    }
+        //sendMessage(value, profileName)
+    }, [value, chatId, dispatch]);
 
-    const handleButton = () => {
-        sendMessage(value, profileName)
-    }
-
-    useEffect(() => {
-        let timer;
-        const currentChat = messages[chatId];
-        if (currentChat?.length > 0 && currentChat[currentChat?.length - 1]?.author === profileName) {
-            timer = setInterval(() => {
-                const currentMessage = 'Hi, I\'m a bot';
-                sendMessage(currentMessage, 'Bot')
-            }, 1500);
-        }
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [messages[chatId]]);
+    // useEffect(() => {
+    //     let timer;
+    //     const currentChat = messages[chatId];
+    //     if (currentChat?.length > 0 && currentChat[currentChat?.length - 1]?.author === profileName) {
+    //         timer = setInterval(() => {
+    //             const currentMessage = 'Hi, I\'m a bot';
+    //             sendMessage(currentMessage, 'Bot')
+    //         }, 1500);
+    //     }
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // }, [messages[chatId]]);
 
     const pressEnter = (e) => {
         if (e.keyCode === 13) {
@@ -52,6 +59,7 @@ const ControlPanel = () => {
             e.preventDefault();
         }
     }
+
     return (
         <div>
             <Box
