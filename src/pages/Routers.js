@@ -5,6 +5,7 @@ import Chats from './Chats';
 import Home from './Home';
 import NoChats from './NoChats';
 import Profile from './Profile';
+import Gists from "./Gists";
 
 
 const Routers = () => {
@@ -26,6 +27,12 @@ const Routers = () => {
                     </ListItem>
 
                     <ListItem component="div" disablePadding>
+                        <ListItemButton sx={{ height: 56}}>
+                            <Link style={{ textDecoration: 'none', color: 'white' }} to='/gists'>Gists</Link>
+                        </ListItemButton>
+                    </ListItem>
+
+                    <ListItem component="div" disablePadding>
                         <ListItemButton sx={{ height: 56 }}>
                             <Link style={{ textDecoration: 'none', color: 'white' }} to='/profile'>Profile</Link>
                         </ListItemButton>
@@ -36,6 +43,7 @@ const Routers = () => {
                 <Routes>
                     <Route path='/' exact element={<Home />} />
                     <Route path='/chats/:chatId' element={<Chats />} />
+                    <Route path="/gists" element={<Gists />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='*' element={<NoChats />} />
                 </Routes>
