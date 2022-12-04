@@ -4,14 +4,15 @@ import { Person, Send } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMessage, addMessageSaga } from '../store/messages/actions';
 import { useParams } from 'react-router-dom'
-import {getmessageList} from "../store/messages/selectors";
+// import {getmessageList} from "../store/messages/selectors";
 import {getProfileName} from "../store/profile/selectors";
-
+import { getDatabase, ref, push, set } from 'firebase/database'
+import firebase from '../service/firebase';
 
 
 const ControlPanel = () => {
     const [value, setValue] = useState('');
-    // const messages = useSelector(getmessageList);
+    // const messages = useSelector(state => state.messages.messageList);
     const profileName = useSelector(getProfileName);
     const dispatch = useDispatch();
     const { chatId } = useParams();
@@ -29,29 +30,46 @@ const ControlPanel = () => {
     //     setValue('');
     // }
 
+    /*lesson 8
     const handleButton = useCallback(() => {
-        // dispatch(addMessage(chatId, {
+
         dispatch(addMessageSaga(chatId, {
             text: value,
             author: profileName
         }));
         setValue('');
-        //sendMessage(value, profileName)
-    }, [value, chatId, dispatch]);
 
+    }, [value, chatId, dispatch]);
+    */
+
+    //Реализация добавление сообщения бота через таймер
     // useEffect(() => {
     //     let timer;
     //     const currentChat = messages[chatId];
     //     if (currentChat?.length > 0 && currentChat[currentChat?.length - 1]?.author === profileName) {
     //         timer = setInterval(() => {
-    //             const currentMessage = 'Hi, I\'m a bot';
-    //             sendMessage(currentMessage, 'Bot')
+    //             const currentMessage = 'hi human';
+    //             sendMessage(currentMessage, 'bender')
     //         }, 1500);
     //     }
     //     return () => {
     //         clearTimeout(timer);
     //     };
     // }, [messages[chatId]]);
+
+
+    const handleButton = useCallback(() => {
+        const message = {
+            text: value,
+            author: profileName
+        };
+        const db = getDatabase(firebase);
+        const messageRef = ref(db, `/messages/${chatId}`);
+        const newMessageRef = push(messageRef);
+        set(newMessageRef, message).then((res) => console.log(res));
+        setValue('');
+    }, [value, chatId]);
+
 
     const pressEnter = (e) => {
         if (e.keyCode === 13) {
