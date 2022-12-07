@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { List, ListItem, ListItemText, Box, ListItemAvatar, Avatar } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { renderMessagePresentation } from '../renderMessagePresentation/renderMessagePresentation'
 import {getmessageList} from "../store/messages/selectors";
 
 
@@ -14,19 +15,21 @@ const MessageList = () => {
 
     const renderMessage = useCallback((message, index) => {
         return (
-            <ListItem
 
+            // <renderMessagePresentation index={index} author={message.author} text={message.text} profileName={profileName} />
+
+            <ListItem
                 key={index}
             >
                 <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: message.author === 'bot' ? 'green' : '#1d46ad' }}>
-
+                    <Avatar sx={{ bgcolor: message.author === 'bender' ? 'green' : '#1d46ad' }}>
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={message.text} secondary={message.author} />
             </ListItem>
         )
     }, []);
+
 
 
     return (

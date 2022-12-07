@@ -5,18 +5,6 @@ const initialState = {
     messageList: {}
 }
 
-/**
- * 
- * chatIdType = {
- *      id:string,
- *      text: string,
- *      author: string
- * }
- *  messageList: {
- *      [chatId]: chatIdType[]       
- * }
- */
-
 const messagesReduser = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE: {
