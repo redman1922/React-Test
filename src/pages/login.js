@@ -1,9 +1,13 @@
 import { Box, Paper, TextField, Button, Typography } from '@mui/material'
-
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { getDataFromFireBase } from '../store/middleware'
 import useAuth from '../hook/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom'
+
+
 const Login = () => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const auth = useAuth();
@@ -24,8 +28,10 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await auth.signin({ email, password }, () => {
-            navigate(from, { replace: true })
+            navigate(from, { replace: true });
+            dispatch(getDataFromFireBase());
         })
+
     }
 
     return <Box sx={{

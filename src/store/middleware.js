@@ -1,5 +1,8 @@
 import { API_URL_PUBLIC } from "../contants/endpoints";
 import { getGistsFailure, getGistsRequest, getGistsSuccess } from "./gists/actions";
+import { getDatabase, ref, get, child, push, set, onValue } from 'firebase/database'
+import firebase from '../service/firebase';
+import { fbGetChat } from './chats/actions'
 
 export const getALLGists = () => async (dispatch) => {
     dispatch(getGistsRequest());
@@ -13,6 +16,22 @@ export const getALLGists = () => async (dispatch) => {
     } catch (err) {
         dispatch(getGistsFailure(err.message))
     }
+}
+
+export const getDataFromFireBase = () => async (dispatch) => {
+    const db = getDatabase(firebase);
+    const dbRef = ref(db);
+    get(child(dbRef, '/chats')).then((snapshot) => {
+        if (snapshot.val()) {
+            const obj = snapshot.val();
+            const chatIds = Object.keys(obj);
+            const chatArr = chatIds.map(item => ({ id: item, name: obj[item].name }));
+            console.log(chatArr);
+            dispatch(fbGetChat(chatArr));
+        } else {
+            console.log('нет данных');
+        }
+    });
 }
 
 
