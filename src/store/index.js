@@ -1,6 +1,5 @@
 import { applyMiddleware, combineReducers, createStore, compose } from "redux";
 import profileReducer from "./profile/profileReducer";
-import chatsReducer from "./chats/reducer"
 import messagesReducer from "./messages/reducer";
 // import middleware from './middleware'
 import createSagaMiddleware from 'redux-saga'
@@ -9,6 +8,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from 'redux-persist'
 import thunk from "redux-thunk";
 import gistsReducer from "./gists/reducer";
+import fbChatsReducer from './chats/reducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware()
@@ -19,7 +19,7 @@ const persistConfig = {
 }
 
 const allReducers = combineReducers({
-    chats: chatsReducer,
+    fbChats: fbChatsReducer,
     profile: profileReducer,
     messages: messagesReducer,
     gists: gistsReducer

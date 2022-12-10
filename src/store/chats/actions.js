@@ -1,13 +1,19 @@
-export const ADD_CHAT = "CHATS::ADD_CHAT";
-export const DELETE_CHAT = "CHATS::DELETE_CHAT";
+export const FB_ADD_CHAT = "CHATS::FB_ADD_CHAT";
+export const FB_DELETE_CHAT = "CHATS::FB_DELETE_CHAT";
+export const FB_GET_CHAT = "CHATS::FB_GET_CHAT";
 
-export const addChat = (name) => ({
-    type: ADD_CHAT,
+
+export const fbAddChat = (name) => ({
+    type: FB_ADD_CHAT,
     name
-})
+});
 
-export const delChat = (name) => ({
-    type: DELETE_CHAT,
-    name
-})
+export const fbDeleteChat = (id) => ({
+    type: FB_DELETE_CHAT,
+    id
+});
 
+export const fbGetChat = (data) => ({
+    type: FB_GET_CHAT,
+    data
+});
